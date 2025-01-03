@@ -1,12 +1,14 @@
 package com.example.lv3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class ArithmeticCalculator<T extends Number> {
     private List<Double> numbers = new ArrayList<>();
 
+    // 계산 후 결과 저장
     public double calculateAndSave(T num1, T num2, OperatorType type) {
         double result = 0;
         switch (type) {
@@ -34,12 +36,19 @@ public class ArithmeticCalculator<T extends Number> {
         return result;
     }
 
+    // 전체 출력
     public void printNumbers() {
         for (int i = 0; i < numbers.size(); i++) {
             System.out.println("[" + i + "]: " + numbers.get(i));
         }
     }
 
+    // 단건 출력
+    public void printNumber(int idx) {
+        System.out.println("[" + idx + "]: " + numbers.get(idx));
+    }
+
+    // input 보다 큰 값 출력
     public void printNumbersGreaterThanInput(double input) {
         numbers.stream()
             .filter(num -> num > input)
@@ -52,10 +61,12 @@ public class ArithmeticCalculator<T extends Number> {
         return numbers;
     }
 
+    // 특정 인덱스의 값 변경
     public void setNumbers(int idx, double val) {
-        this.numbers = Collections.singletonList(numbers.set(idx, val));
+        numbers.set(idx, val);
     }
 
+    // 0 번째 인덱스 값 삭제
     public void removeFirstResult() {
         numbers.remove(0);
     }
