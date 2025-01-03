@@ -27,9 +27,11 @@ public class App {
             } catch (InputMismatchException ime) {
                 System.out.println("잘못된 입력입니다.");
                 scanner.nextLine(); // 개행 문자 제거
+                continue;
             } catch (IndexOutOfBoundsException ioobe) {
                 System.out.println("저장된 값이 없거나 잘못된 인덱스 지정입니다.");
                 scanner.nextLine(); // 개행 문자 제거
+                continue;
             }
 
             scanner.nextLine(); // 개행 문자 제거
