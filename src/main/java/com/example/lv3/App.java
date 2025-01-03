@@ -74,7 +74,7 @@ public class App {
 
         System.out.print("값을 입력해주세요 > ");
         double value = scanner.nextDouble();
-        calculator.setNumbers(idx, value);
+        calculator.updateDataAtIndex(idx, value);
 
         System.out.println("=== 변경한 값 출력 ===");
         calculator.printNumber(idx);

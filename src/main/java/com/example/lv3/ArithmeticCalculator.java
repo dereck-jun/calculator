@@ -1,8 +1,6 @@
 package com.example.lv3;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ArithmeticCalculator<T extends Number> {
@@ -62,7 +60,7 @@ public class ArithmeticCalculator<T extends Number> {
     }
 
     // 특정 인덱스의 값 변경
-    public void setNumbers(int idx, double val) {
+    public void updateDataAtIndex(int idx, double val) {
         numbers.set(idx, val);
     }
 
