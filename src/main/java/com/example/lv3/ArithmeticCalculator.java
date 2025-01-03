@@ -24,7 +24,7 @@ public class ArithmeticCalculator<T extends Number> {
             }
             case DIVIDE -> {
                 if (num2.doubleValue() == 0) {
-                    throw new ArithmeticException("0 으로 나눌 수 없습니다.");
+                    throw new ArithmeticException();
                 }
                 result = num1.doubleValue() / num2.doubleValue();
                 numbers.add(result);

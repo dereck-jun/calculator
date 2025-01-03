@@ -32,6 +32,10 @@ public class App {
                 System.out.println("저장된 값이 없거나 잘못된 인덱스 지정입니다.");
                 scanner.nextLine(); // 개행 문자 제거
                 continue;
+            } catch (ArithmeticException ae) {
+                System.out.println("0 으로 나눌 수 없습니다.");
+                scanner.nextLine(); // 개행 문자 제거
+                continue;
             }
 
             scanner.nextLine(); // 개행 문자 제거
