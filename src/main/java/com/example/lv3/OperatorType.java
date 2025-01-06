@@ -1,5 +1,7 @@
 package com.example.lv3;
 
+import com.example.lv3.exception.ClientException;
+
 public enum OperatorType {
     PLUS("+"),
     MINUS("-"),
@@ -20,6 +22,6 @@ public enum OperatorType {
                 return type;
             }
         }
-        throw new IllegalArgumentException("지원하지 않는 연산 기호 입니다.");
+        throw new ClientException("지원하지 않는 연산 기호 입니다.");
     }
 }
