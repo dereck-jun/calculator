@@ -6,6 +6,7 @@ public class ClientException extends RuntimeException {
 
     public ClientException(String message) {
         super(message);
+        System.out.println(message);
     }
 
 }
