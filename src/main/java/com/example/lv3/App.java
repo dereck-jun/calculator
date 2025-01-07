@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.example.lv3.OperatorType.fromSymbol;
+import static com.example.lv3.operation.OperatorType.fromSymbol;
 
 public class App {
     public static void main(String[] args) {
@@ -35,11 +35,11 @@ public class App {
                 scanner.nextLine(); // 개행 문자 제거
                 continue;
             } catch (IndexOutOfBoundsException ioobe) {
-                System.out.println("저장된 값이 없거나 잘못된 인덱스 지정입니다.");
+                System.out.println("잘못된 인덱스 지정입니다.");
                 scanner.nextLine(); // 개행 문자 제거
                 continue;
             } catch (ArithmeticException ae) {
-                System.out.println("0 으로 나눌 수 없습니다.");
+                System.out.println("0으로 나눌 수 없습니다.");
                 scanner.nextLine(); // 개행 문자 제거
                 continue;
             } catch (ClientException ce) {
