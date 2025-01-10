@@ -1,11 +1,13 @@
 package com.example.challenge.converter;
 
 import com.example.challenge.exception.BaseException;
-import com.example.challenge.operation.*;
+import com.example.challenge.operation.Operator;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 
+
+import static com.example.challenge.factory.OperatorFactory.getOperator;
 import static com.example.challenge.operation.OperatorType.fromSymbol;
 import static com.example.challenge.operation.OperatorType.isOperator;
 
@@ -32,25 +34,9 @@ public class PostfixEvaluator extends AbstractExpressionProcessor {
 
                 StringBuilder result = new StringBuilder();
 
-                switch (fromSymbol(item.charAt(0))) {
-                    case PLUS -> {
-                        operator = new AddOperator<>();
-                        result.append(operator.operation(firstInputNum, secondInputNum));
-                    }
-                    case MINUS -> {
-                        operator = new SubtractOperator<>();
-                        result.append(operator.operation(firstInputNum, secondInputNum));
-                    }
-                    case MULTIPLY -> {
-                        operator = new MultiplyOperator<>();
-                        result.append(operator.operation(firstInputNum, secondInputNum));
-                    }
-                    case DIVIDE -> {
-                        operator = new DivideOperator<>();
-                        result.append(operator.operation(firstInputNum, secondInputNum));
-                    }
-                    default -> throw new IllegalArgumentException();
-                }
+                operator = getOperator(fromSymbol(item.charAt(0)));
+                result.append(operator.operation(firstInputNum, secondInputNum));
+
                 operandStack.push(result.toString());
             }
         }

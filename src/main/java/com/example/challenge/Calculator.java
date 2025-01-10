@@ -55,9 +55,9 @@ public class Calculator {
     }
 
     // input 보다 큰 값 출력
-    public void printNumbersGreaterThanInput(Number input) {
+    public void printNumbersGreaterThanInput(double input) {
         operationResults.stream()
-            .filter(num -> num.doubleValue() > input.doubleValue())
+            .filter(num -> num.doubleValue() > input)
             .forEach(num -> System.out.println("입력하신 " + input + "보다 큰 값: " + num + " "));
     }
 
