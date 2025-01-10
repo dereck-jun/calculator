@@ -1,8 +1,15 @@
 package com.example.lv3.operation;
 
-public class AddOperator<T extends Number> implements Operator<T> {
+import java.math.BigDecimal;
+
+import static com.example.lv3.NumberUtils.castToType;
+import static com.example.lv3.NumberUtils.convertToBigDecimal;
+
+public class AddOperator implements Operator {
+
     @Override
-    public Number operation(T firstNum, T secondNum) {
-        return firstNum.doubleValue() + secondNum.doubleValue();
+    public <T extends Number> T operation(T firstNum, T secondNum, Class<T> type) {
+        BigDecimal sum = convertToBigDecimal(firstNum).add(convertToBigDecimal(secondNum));
+        return castToType(sum, type);
     }
 }
