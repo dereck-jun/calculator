@@ -116,7 +116,7 @@ public class App {
 
     private static void handleFindResultsGreaterThanInput(Scanner scanner, ArithmeticCalculator<Number> calculator) {
         System.out.print("검색하려는 값을 입력해주세요 > ");
-        Number input = scanner.nextBigDecimal();
+        double input = scanner.nextDouble();
         calculator.printNumbersGreaterThanInput(input);
     }
 

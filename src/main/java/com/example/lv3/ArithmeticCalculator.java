@@ -1,10 +1,13 @@
 package com.example.lv3;
 
 import com.example.lv3.exception.ClientException;
+import com.example.lv3.factory.OperatorFactory;
 import com.example.lv3.operation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.lv3.factory.OperatorFactory.getOperator;
 
 public class ArithmeticCalculator<T extends Number> {
     private List<T> numbers = new ArrayList<>();
@@ -12,29 +15,8 @@ public class ArithmeticCalculator<T extends Number> {
     // 계산 후 결과 저장
     public Number calculate(T firstNum, T secondNum, OperatorType type) {
         Operator<T> operator;
-        switch (type) {
-            case PLUS -> {
-                operator = new AddOperator<>();
-                return operator.operation(firstNum, secondNum);
-            }
-            case MINUS -> {
-                operator = new SubtractOperator<>();
-                return operator.operation(firstNum, secondNum);
-            }
-            case MULTIPLY -> {
-                operator = new MultiplyOperator<>();
-                return operator.operation(firstNum, secondNum);
-            }
-            case DIVIDE -> {
-                operator = new DivideOperator<>();
-                return operator.operation(firstNum, secondNum);
-            }
-            case REMAIN -> {
-                operator = new RemainOperator<>();
-                return operator.operation(firstNum, secondNum);
-            }
-            default -> throw new ClientException("지원하지 않거나 잘못된 연산 기호입니다.");
-        }
+        operator = getOperator(type);
+        return operator.operation(firstNum, secondNum);
     }
 
     public void printAndSaveResult(T result) {
@@ -55,9 +37,9 @@ public class ArithmeticCalculator<T extends Number> {
     }
 
     // input 보다 큰 값 출력
-    public void printNumbersGreaterThanInput(Number input) {
+    public void printNumbersGreaterThanInput(double input) {
         numbers.stream()
-            .filter(num -> num.doubleValue() > input.doubleValue())
+            .filter(num -> num.doubleValue() > input)
             .forEach(num -> System.out.println("입력하신 " + input + "보다 큰 값: " + num + " "));
     }
 
