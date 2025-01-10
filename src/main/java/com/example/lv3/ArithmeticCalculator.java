@@ -1,22 +1,29 @@
 package com.example.lv3;
 
 import com.example.lv3.exception.ClientException;
-import com.example.lv3.factory.OperatorFactory;
-import com.example.lv3.operation.*;
+import com.example.lv3.operation.Operator;
+import com.example.lv3.operation.OperatorType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static com.example.lv3.NumberUtils.convertToBigDecimal;
 import static com.example.lv3.factory.OperatorFactory.getOperator;
 
 public class ArithmeticCalculator<T extends Number> {
-    private List<T> numbers = new ArrayList<>();
+    private final List<T> numbers = new ArrayList<>();
+    private final Class<T> type;
+
+    public ArithmeticCalculator(Class<T> type) {
+        this.type = type;
+    }
 
     // 계산 후 결과 저장
-    public Number calculate(T firstNum, T secondNum, OperatorType type) {
-        Operator<T> operator;
-        operator = getOperator(type);
-        return operator.operation(firstNum, secondNum);
+    public T calculate(T firstNum, T secondNum, OperatorType operatorType) {
+        Operator operator;
+        operator = getOperator(operatorType);
+        return operator.operation(firstNum, secondNum, type);
     }
 
     public void printAndSaveResult(T result) {
@@ -37,10 +44,10 @@ public class ArithmeticCalculator<T extends Number> {
     }
 
     // input 보다 큰 값 출력
-    public void printNumbersGreaterThanInput(double input) {
-        numbers.stream()
-            .filter(num -> num.doubleValue() > input)
-            .forEach(num -> System.out.println("입력하신 " + input + "보다 큰 값: " + num + " "));
+    public List<T> getResultsGreaterThanInput(T input) {
+        return numbers.stream()
+            .filter(num -> convertToBigDecimal(num).compareTo(convertToBigDecimal(input)) > 0)
+            .collect(Collectors.toList());
     }
 
     // 특정 인덱스의 값 변경
@@ -61,9 +68,5 @@ public class ArithmeticCalculator<T extends Number> {
 
     public List<T> getNumbers() {
         return numbers;
-    }
-
-    public void setNumbers(List<T> numbers) {
-        this.numbers = new ArrayList<>(numbers);
     }
 }

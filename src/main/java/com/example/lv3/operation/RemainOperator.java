@@ -1,11 +1,18 @@
 package com.example.lv3.operation;
 
-public class RemainOperator<T extends Number> implements Operator<T> {
+import java.math.BigDecimal;
+
+import static com.example.lv3.NumberUtils.castToType;
+import static com.example.lv3.NumberUtils.convertToBigDecimal;
+
+public class RemainOperator implements Operator {
     @Override
-    public Number operation(T firstNum, T secondNum) {
-        if (secondNum.doubleValue() == 0) {
+    public <T extends Number> T operation(T firstNum, T secondNum, Class<T> type) {
+        BigDecimal divisor = convertToBigDecimal(secondNum);
+        if (BigDecimal.ZERO.compareTo(divisor) == 0) {
             throw new ArithmeticException();
         }
-        return firstNum.doubleValue() % secondNum.doubleValue();
+        BigDecimal divide = convertToBigDecimal(firstNum).remainder(divisor);
+        return castToType(divide, type);
     }
 }

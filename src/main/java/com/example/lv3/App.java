@@ -2,7 +2,6 @@ package com.example.lv3;
 
 import com.example.lv3.exception.ClientException;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -12,13 +11,13 @@ import static com.example.lv3.operation.OperatorType.fromSymbol;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArithmeticCalculator<Number> calculator = new ArithmeticCalculator<>();
+        ArithmeticCalculator<Number> calculator = new ArithmeticCalculator<>(Number.class);
         String userChoice = "";
 
         while (!userChoice.equalsIgnoreCase("exit")) {
             try {
                 System.out.println("== 작업을 선택해주세요 ==");
-                System.out.println("(1) 계산기 | (2) 결과 확인 | (3) 최근 값 하나 제거 | (4) 특정 인덱스 값 변경 | (5) 초기값 설정 | (6) 입력 값보다 큰 저장 값 조회");
+                System.out.println("(1) 계산기 | (2) 결과 확인 | (3) 최근 값 하나 제거 | (4) 특정 인덱스 값 변경 | (5) 입력 값보다 큰 저장 값 조회");
                 int choice = scanner.nextInt();
 
                 switch (choice) {
@@ -26,8 +25,7 @@ public class App {
                     case 2 -> handlePrintResults(calculator);
                     case 3 -> handleRemoveFirstResult(calculator);
                     case 4 -> handleUpdateResult(scanner, calculator);
-                    case 5 -> handleInsertInitialValue(scanner, calculator);
-                    case 6 -> handleFindResultsGreaterThanInput(scanner, calculator);
+                    case 5 -> handleFindResultsGreaterThanInput(scanner, calculator);
                     default -> throw new ClientException("목록에 없는 값입니다. 다시 입력해주세요.");
                 }
             } catch (InputMismatchException ime) {
@@ -97,33 +95,14 @@ public class App {
         calculator.printNumber(idx);
     }
 
-    private static void handleInsertInitialValue(Scanner scanner, ArithmeticCalculator<Number> calculator) {
-        List<Number> tempList = new ArrayList<>();
-        System.out.print("넣으려는 초기값의 개수를 입력해주세요 > ");
-        int count = scanner.nextInt();
-        validateNumber(count);
-
-        for (int i = 0; i < count; i++) {
-            System.out.print("저장할 " + (i + 1) + " 번째 값을 입력해주세요 > ");
-            Number value = scanner.nextBigDecimal();
-            tempList.add(value);
-        }
-        calculator.setNumbers(tempList);
-
-        System.out.println("=== 입력한 초기값 결과 ===");
-        calculator.printNumbers();
-    }
-
     private static void handleFindResultsGreaterThanInput(Scanner scanner, ArithmeticCalculator<Number> calculator) {
         System.out.print("검색하려는 값을 입력해주세요 > ");
-        double input = scanner.nextDouble();
-        calculator.printNumbersGreaterThanInput(input);
-    }
+        Number input = scanner.nextBigDecimal();
+        List<Number> resultsGreaterThanInput = calculator.getResultsGreaterThanInput(input);
 
-    private static void validateNumber(int num) {
-        if (num >= 0) {
-            return;
+        System.out.println("=== 입력한 " + input + " 보다 큰 값 ===");
+        for (Number number : resultsGreaterThanInput) {
+            System.out.println(number);
         }
-        throw new ClientException("0을 포함한 양의 정수만 입력할 수 있습니다.");
     }
 }
