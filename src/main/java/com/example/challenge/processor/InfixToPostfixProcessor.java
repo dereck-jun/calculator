@@ -1,8 +1,8 @@
-package com.example.challenge.converter;
+package com.example.challenge.processor;
 
 import static com.example.challenge.operation.OperatorType.*;
 
-public class InfixToPostfixConverter extends AbstractExpressionProcessor {
+public class InfixToPostfixProcessor extends AbstractExpressionProcessor {
     private StringBuilder postfixResult = new StringBuilder();
 
     private static String replaceExpression(String expression) {

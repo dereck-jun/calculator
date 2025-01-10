@@ -1,14 +1,21 @@
 package com.example.challenge;
 
-import com.example.challenge.converter.AbstractExpressionProcessor;
-import com.example.challenge.converter.InfixToPostfixConverter;
-import com.example.challenge.converter.PostfixEvaluator;
+import com.example.challenge.factory.ProcessorFactory;
+import com.example.challenge.operation.OperatorType;
+import com.example.challenge.processor.AbstractExpressionProcessor;
+import com.example.challenge.processor.InfixToPostfixProcessor;
+import com.example.challenge.processor.PostfixEvaluationProcessor;
 import com.example.challenge.exception.BaseException;
+import com.example.challenge.processor.ProcessorType;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.challenge.factory.ProcessorFactory.getProcessor;
+import static com.example.challenge.processor.ProcessorType.INFIX_TO_POSTFIX;
+import static com.example.challenge.processor.ProcessorType.POSTFIX_EVALUATION;
 
 public class Calculator {
     private List<Number> operationResults = new ArrayList<>();
@@ -78,12 +85,12 @@ public class Calculator {
     }
 
     private String infixToPostfix(String mathExpression) {
-        processor = new InfixToPostfixConverter();
+        processor = getProcessor(INFIX_TO_POSTFIX);
         return processor.process(mathExpression);
     }
 
     private String postfixEvaluation(String postfix) {
-        processor = new PostfixEvaluator();
+        processor = getProcessor(POSTFIX_EVALUATION);
         return processor.process(postfix);
     }
 }

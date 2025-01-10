@@ -1,4 +1,4 @@
-package com.example.challenge.converter;
+package com.example.challenge.processor;
 
 import java.util.ArrayList;
 import java.util.List;

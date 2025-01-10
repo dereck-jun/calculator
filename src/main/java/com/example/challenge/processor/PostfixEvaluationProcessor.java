@@ -1,4 +1,4 @@
-package com.example.challenge.converter;
+package com.example.challenge.processor;
 
 import com.example.challenge.exception.BaseException;
 import com.example.challenge.operation.Operator;
@@ -11,7 +11,7 @@ import static com.example.challenge.factory.OperatorFactory.getOperator;
 import static com.example.challenge.operation.OperatorType.fromSymbol;
 import static com.example.challenge.operation.OperatorType.isOperator;
 
-public class PostfixEvaluator extends AbstractExpressionProcessor {
+public class PostfixEvaluationProcessor extends AbstractExpressionProcessor {
     @Override
     public String process(String expression) {
         Operator<Number> operator;
